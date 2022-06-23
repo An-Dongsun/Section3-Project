@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        draw star by number
+    </title>
+    <style>
+        h1 { text-align: center; }
+        form {
+            /* Just to center the form on the page */
+            margin: 0 auto;
+            width: 800px;
+            /* To see the outline of the form */
+            padding: 1em;
+            border: 1px solid #CCC;
+            border-radius: 1em;
+        }
+        form div + div {
+            /* div div 사이에 여백 추가*/
+            margin-top: 1em;
+        }
+        label {
+            /* To make sure that all label have the same size and are properly align */
+            display: inline-block;
+            width: 800px;
+            text-align: left;
+        }
+        .button {
+            /* To position the buttons to the same position of the text fields */
+            padding-left: 90px; /* same size as the label elements */
+        }
+
+        button {
+            /* This extra margin represent roughly the same space as the space
+            between the labels and their text fields */
+            margin-left: .5em;
+        }
+    </style>
+</head>
+<body>
+    <h1> 당뇨병 예측</h1><br>
+    <form method="GET" action="/calculate">
+        <div style="text-align: center;">
+            <input type='reset'>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="age"> 나이 </label><br>
+            <input type="text" name="age" placeholder="숫자" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="sex"> 성별 </label><br>
+            <input type="text" name="sex" placeholder="여자:0, 남자:1" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="BMI"> BMI </label><br>
+            <input type="text" name="BMI" placeholder="BMI 수치" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="GenHlth"> 일반적으로 귀하의 건강 상태는 어떤가요? </label> <br>
+            <input type="text" name="GenHlth" placeholder="1 = excellent, 2 = very good, 3 = good, 4 = fair, 5 = poor" size=116 >
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="PhysHlth"> 지금 귀하의 신체적 질병과 부상을 포함한 신체적 건강을 생각해보면,<br> 지난 30일 동안 귀하의 신체 건강이 좋지 않았던 날은 며칠입니까?</label> <br>
+            <input type="text" name="PhysHlth" placeholder="1 ~ 30" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="MentHlth"> 스트레스, 우울증, 감정 문제 등을 포함한 정신 건강을 생각해보면,<br> 지난 30일 동안 정신 건강이 좋지 않았던 날은 며칠입니까? </label> <br>
+            <input type="text" name="MentHlth" placeholder="1 ~ 30" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="PhysActivity"> 지난 30일 동안의 신체 활동 여부 - 직업을 포함하지 않음 </label> <br>
+            <input type="text" name="PhysActivity" placeholder="0 = 아니오, 1 = 예" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="DiffWalk"> 걷거나 계단을 오르는데 심각한 어려움이 있습니까? </label> <br>
+            <input type="text" name="DiffWalk" placeholder="0 = 아니오, 1 = 예" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="Smoker"> 당신은 일생 동안 적어도 100개비의 담배를 피웠습니까? [참고: 5갑 = 100개비] </label> <br>
+            <input type="text" name="Smoker" placeholder="0 = 아니오, 1 = 예" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="Fruits"> 과일을 하루에 1번 이상 섭취 하시나요? </label> <br>
+            <input type="text" name="Fruits" placeholder="0 = 아니오, 1 = 예" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="Veggies"> 채소를 하루에 1번 이상 섭취 하시나요? </label> <br>
+            <input type="text" name="Veggies" placeholder="0 = 아니오, 1 = 예" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="HighBP"> 고혈압이 있나요? </label> <br>
+            <input type="text" name="HighBP" placeholder="0 = 아니오, 1 = 예" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="HighChol"> 고콜레스테롤이 있나요? </label> <br>
+            <input type="text" name="HighChol" placeholder="0 = 아니오, 1 = 예" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="Stroke"> 뇌졸중이 있나요? </label> <br>
+            <input type="text" name="Stroke" placeholder="0 = 아니오, 1 = 예" size=116>
+        </div>
+        <div style='font-size:1.5em;'>
+            <label for="HeartDiseaseorAttack"> 관상 동맥 심장 질환(CHD) 또는 심근 경색증(MI)이 있나요? </label> <br>
+            <input type="text" name="HeartDiseaseorAttack" placeholder="0 = 아니오, 1 = 예" size=116>
+        </div>
+        <div class='button'>
+            <button type="submit">숫자만큼 별 표시하기</button>
+        </div>
+    </form>
+    <div>
+        <p>
+            {% if age == None %}
+                <h1> 나이를 입력해 주세요. </h1>
+            {% else %}
+                {% if sex == None %}
+                <h1> 성별을 입력해 주세요. </h1>
+                {% else %}
+                    {% if BMI == None %}
+                    <h1> BMI수치를 입력해 주세요. </h1>
+                    {% else %}
+                        {% if GenHlth == None %}
+                        <h1> 일반적인 건강 상태를 입력해 주세요. </h1>
+                        {% else %}
+                            {% if PhysHlth == None %}
+                            <h1> 신체적 건강 상태를 입력해 주세요. </h1>
+                            {% else %}
+                                {% if MentHlth == None %}
+                                <h1> 정신적 건강 상태를 입력해 주세요. </h1>
+                                    {% else %}
+                                    {% if PhysActivity == None %}
+                                    <h1> 지난 30일 동안의 신체 활동 여부 상태를 입력해 주세요. </h1>
+                                    {% else %}
+                                        {% else %}
+                                        {% if DiffWalk == None %}
+                                        <h1> 걷거나 계단을 오르는데 심각한 어려움이 있는지 입력해 주세요. </h1>
+                                        {% else %}
+                                            {% if Smoker == None %}
+                                            <h1> 흡연여부를 입력해 주세요. </h1>
+                                            {% else %}
+                                                {% if Fruits == None %}
+                                                <h1> 과일 섭취 여부를 입력해 주세요. </h1>
+                                                {% else %}
+                                                    {% if Veggies == None %}
+                                                    <h1> 채소 섭취 여부를 입력해 주세요. </h1>
+                                                    {% else %}
+                                                        {% if HighBP == None %}
+                                                        <h1> 고혈압 여부를 입력해 주세요. </h1>
+                                                        {% else %}
+                                                            {% if HighChol == None %}
+                                                            <h1> 고콜레스테롤이 있는지 입력해 주세요. </h1>
+                                                            {% else %}
+                                                                {% if Stroke == None %}
+                                                                <h1> 뇌졸증이 있는지 입력해 주세요. </h1>
+                                                                {% else %}
+                                                                    {% if HeartDiseaseorAttack == None %}
+                                                                    <h1> 관상 동맥 심장 질환(CHD) 또는 심근 경색증(MI)이 있는지 입력해 주세요. </h1>
+                                                                    {% else %}
+                                                                        <h1> {{result}} </h1>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </p>
+    </div>
+</body>
+</html>
