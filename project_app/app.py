@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request, url_for
 
-app = Flask(__name__, static_url_path='/static')
-
 import pandas as pd
 import pickle
 from sklearn.pipeline import make_pipeline, Pipeline
@@ -9,17 +7,15 @@ from sklearn.impute import SimpleImputer
 from lightgbm import LGBMClassifier
 from sklearn.metrics import f1_score, log_loss
 
-# 머신러닝 모델 역피클링
-pipe_LGBM = None
-with open('./model.pkl','rb') as pickle_file:
-   pipe_LGBM = pickle.load(pickle_file)
+app = Flask(__name__, static_url_path='/static')
+
 
 ## GET 방식으로 값을 전달받음. 
 ## num이라는 이름을 가진 integer variable를 넘겨받는다고 생각하면 됨. 
 ## 아무 값도 넘겨받지 않는 경우도 있으므로 비어 있는 url도 함께 mapping해주는 것이 필요함
 @app.route('/')
-def main_get(num=None):
-    return render_template('resurch.html', num=num)
+def main_get(age=None):
+    return render_template('resurch.html', age=age)
 
 @app.route('/calculate', methods=['POST', 'GET'])
 def calculate(age=None):
@@ -131,18 +127,23 @@ def calculate(age=None):
         HeartDiseaseorAttack = int(HeartDiseaseorAttack)
         x_test['HeartDiseaseorAttack'] = HeartDiseaseorAttack
 
+        # 머신러닝 모델 역피클링
+        pipe_LGBM = None
+        with open('model.pkl','rb') as pickle_file:
+            pipe_LGBM = pickle.load(pickle_file)
+
         # x_test를 가지고 model에 넣어서 예측을 한다.
         result = pipe_LGBM.predict(x_test)[0]
 
         if result == 0.0 :
-            result = '당뇨병이 아닙니다.'
+            text = '당뇨병이 아닙니다.'
         elif result == 1.0 :
-            result = '당뇨병 전증 입니다.'
+            text = '당뇨병 전증 입니다.'
         else :
-            result = '당뇨병 입니다.'
+            text = '당뇨병 입니다.'
 
         ## 넘겨받은 값을 원래 페이지로 리다이렉트
-        return render_template('resurch.html', result=result)
+        return render_template('resurch.html', text=text)
     ## else 로 하지 않은 것은 POST, GET 이외에 다른 method로 넘어왔을 때를 구분하기 위함
 
 if __name__ == '__main__':
