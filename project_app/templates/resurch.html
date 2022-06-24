@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>
-        draw star by number
+        Diabetes predict
     </title>
     <style>
         h1 { text-align: center; }
@@ -35,10 +35,17 @@
             between the labels and their text fields */
             margin-left: .5em;
         }
+        div{
+		overflow:hidden;
+		height:auto;
+	    }
     </style>
 </head>
 <body>
     <h1> 당뇨병 예측</h1><br>
+    <div style="text-align: center;">
+        <button type="button" class="navyBtn" onClick="location.href='dashboard'"> Dashboard</button><br>
+    </div>
     <form method="GET" action="/calculate">
         <div style="text-align: center;">
             <input type='reset'>

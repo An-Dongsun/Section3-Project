@@ -146,8 +146,15 @@ def create_app():
             ## 넘겨받은 값을 원래 페이지로 리다이렉트
             return render_template('resurch.html', text=text)
         ## else 로 하지 않은 것은 POST, GET 이외에 다른 method로 넘어왔을 때를 구분하기 위함
+    
+
+    @app.route('/dashboard', methods=['GET'])
+    def dashboard():
+        return render_template('dashboard.html')
+
+
     return app
 
 if __name__ == '__main__':
     # threaded=True 로 넘기면 multiple plot이 가능해짐
-  app.run(debug=True, threaded=True)
+  create_app().run(debug=True, threaded=True)
