@@ -144,7 +144,7 @@ def create_app():
                 text = '당뇨병 입니다.'
 
             ## 넘겨받은 값을 원래 페이지로 리다이렉트
-            return render_template('resurch.html', text=text)
+            return render_template('result.html', text=text)
         ## else 로 하지 않은 것은 POST, GET 이외에 다른 method로 넘어왔을 때를 구분하기 위함
     
 

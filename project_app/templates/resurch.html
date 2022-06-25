@@ -44,8 +44,8 @@
 <body>
     <h1> 당뇨병 예측</h1><br>
     <div style="text-align: center;">
-        <button type="button" class="navyBtn" onClick="location.href='dashboard'"> Dashboard</button><br>
-    </div>
+        <button type="button" class="navyBtn btn-lg" onClick="location.href='dashboard'"> Dashboard</button><br>
+    </div> <br>
     <form method="GET" action="/calculate">
         <div style="text-align: center;">
             <input type='reset'>
@@ -110,74 +110,9 @@
             <label for="HeartDiseaseorAttack"> 관상 동맥 심장 질환(CHD) 또는 심근 경색증(MI)이 있나요? </label> <br>
             <input type="text" name="HeartDiseaseorAttack" placeholder="0 = 아니오, 1 = 예" size=116>
         </div>
-        <div class='button' style="text-align: center;">
+        <div style="text-align: center;">
             <button type="submit"> 예측하기 </button>
         </div>
     </form>
-    <div>
-        <p>
-            {% if age == None %}
-                <h1> 나이를 입력해 주세요. </h1>
-            {% else %}
-                {% if sex == None %}
-                    <h1> 성별을 입력해 주세요. </h1>
-                {% else %}
-                    {% if BMI == None %}
-                        <h1> BMI수치를 입력해 주세요. </h1>
-                    {% else %}
-                        {% if GenHlth == None %}
-                            <h1> 일반적인 건강 상태를 입력해 주세요. </h1>
-                        {% else %}
-                            {% if PhysHlth == None %}
-                                <h1> 신체적 건강 상태를 입력해 주세요. </h1>
-                            {% else %}
-                                {% if MentHlth == None %}
-                                    <h1> 정신적 건강 상태를 입력해 주세요. </h1>
-                                {% else %}
-                                    {% if PhysActivity == None %}
-                                        <h1> 지난 30일 동안의 신체 활동 여부 상태를 입력해 주세요. </h1>
-                                    {% else %}
-                                        {% if DiffWalk == None %}
-                                            <h1> 걷거나 계단을 오르는데 심각한 어려움이 있는지 입력해 주세요. </h1>
-                                        {% else %}
-                                            {% if Smoker == None %}
-                                                <h1> 흡연여부를 입력해 주세요. </h1>
-                                            {% else %}
-                                                {% if Fruits == None %}
-                                                    <h1> 과일 섭취 여부를 입력해 주세요. </h1>
-                                                {% else %}
-                                                    {% if Veggies == None %}
-                                                        <h1> 채소 섭취 여부를 입력해 주세요. </h1>
-                                                    {% else %}
-                                                        {% if HighBP == None %}
-                                                            <h1> 고혈압 여부를 입력해 주세요. </h1>
-                                                        {% else %}
-                                                            {% if HighChol == None %}
-                                                                <h1> 고콜레스테롤이 있는지 입력해 주세요. </h1>
-                                                            {% else %}
-                                                                {% if Stroke == None %}
-                                                                    <h1> 뇌졸증이 있는지 입력해 주세요. </h1>
-                                                                {% else %}
-                                                                    {% if HeartDiseaseorAttack == None %}
-                                                                        <h1> 관상 동맥 심장 질환(CHD) 또는 심근 경색증(MI)이 있는지 입력해 주세요. </h1>
-                                                                    {% else %}
-                                                                        <h1> {{text}} </h1>
-                                                                    {% endif %}
-                                                                {% endif %}
-                                                            {% endif %}
-                                                        {% endif %}
-                                                    {% endif %}
-                                                {% endif %}
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endif %}
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-            {% endif %}
-        </p>
-    </div>
 </body>
 </html>
