@@ -130,7 +130,7 @@ def create_app():
 
             # 머신러닝 모델 역피클링
             pipe_LGBM = None
-            with open('model.pkl','rb') as pickle_file:
+            with open('./model.pkl','rb') as pickle_file:
                 pipe_LGBM = pickle.load(pickle_file)
 
             # x_test를 가지고 model에 넣어서 예측을 한다.
