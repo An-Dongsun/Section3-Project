@@ -99,7 +99,7 @@
 
 
 ## 🎯타겟 선정
-* **Diabetes_012** : 0 = 당뇨병 없음, 1 = 당뇨병 전단계, 2 = 당뇨병
+* **Diabetes_012** : 0 = 당뇨병 없음, 1 = 당뇨병 전증, 2 = 당뇨병
 
 
 ## 당뇨병의 유무 파악
@@ -118,3 +118,7 @@
   * 순열중요도(Permutation Importance, Mean Decrease Accuracy,MDA)
   * PDP(Partial Dependence Plots)
   * SHAP 라이브러리
+
+# 개발 프로세스
+![undefined drawio](https://user-images.githubusercontent.com/102213564/175819164-674df0d5-c45d-4fb2-b5f8-7c52c8deb646.png)
+
