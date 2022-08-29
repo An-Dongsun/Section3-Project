@@ -1,4 +1,6 @@
 # Section3-Project
+### 발표영상
+[![Video Label](http://img.youtube.com/vi/wkSQ_2MOp_I/0.jpg)](https://youtu.be/wkSQ_2MOp_I)
 
 # 🎯 해결하고자 하는 문제
 ## 🎯 Main : 새로운 환자의 설문조사 결과를 바탕으로 당뇨병의 유무를 파악한다. 
